@@ -3,8 +3,7 @@ const jwt = require('jsonwebtoken');
 const SECRET = process.env.JWT_SECRET || 'suaSenhaSecreta';
 
 const auth = (req, res, next) => {
-  const { authorization } = req.headers;
-  const bearerToken = authorization;
+  const bearerToken = req.header('Authorization');
 
   if (!bearerToken || bearerToken === undefined) {
     return res.status(401).json({ message: 'Token not found' });
