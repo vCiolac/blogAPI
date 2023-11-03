@@ -11,4 +11,6 @@ router.post(
 
 router.get('/', authMiddleware, userController.getAllUsers);
 
+router.get('/:id', authMiddleware, userController.getUserById);
+
 module.exports = router;

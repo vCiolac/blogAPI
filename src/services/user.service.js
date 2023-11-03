@@ -34,4 +34,14 @@ const getAllUsers = async () => {
   return { status: 200, data: users };
 };
 
-module.exports = { postUser, getAllUsers };
+const getUserById = async (id) => {
+  const user = await User.findByPk(id, {
+    attributes: { exclude: ['password'] },
+  });
+  if (!user) {
+    return { status: 404, data: { message: 'User does not exist' } };
+  }
+  return { status: 200, data: user };
+};
+
+module.exports = { postUser, getAllUsers, getUserById };
