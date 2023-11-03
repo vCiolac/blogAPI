@@ -7,4 +7,9 @@ const postUser = async (req, res) => {
   res.status(status).json({ token });
 };
 
-module.exports = { postUser };
+const getAllUsers = async (_req, res) => {
+  const { status, data } = await userServices.getAllUsers();
+  res.status(status).json(data);
+};
+
+module.exports = { postUser, getAllUsers };

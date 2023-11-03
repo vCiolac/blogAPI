@@ -11,16 +11,27 @@ const postUser = async (name, mail, password, img) => {
   if (img) {
     userData.image = img;
   }
+
   const newUser = await User.create(userData);
+
   const { id, displayName, email, image } = newUser;
+
   const tokenData = { id, displayName, email };
-  
+
   if (image) {
     tokenData.image = image;
   }
+
   const token = generateToken(tokenData);
 
   return { status: 201, data: { token } };
 };
 
-module.exports = { postUser };
+const getAllUsers = async () => {
+  const users = await User.findAll({
+    attributes: { exclude: ['password'] },
+  });
+  return { status: 200, data: users };
+};
+
+module.exports = { postUser, getAllUsers };
