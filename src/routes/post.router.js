@@ -4,4 +4,6 @@ const { authMiddleware, postValidate } = require('../middlewares');
 
 router.post('/', authMiddleware, postValidate, postController.addNewBlogPost);
 
+router.get('/', authMiddleware, postController.getAllBlogPosts);
+
 module.exports = router;

@@ -19,6 +19,7 @@ const UserSchema = (sequelize, DataTypes) => {
     UserTable.hasMany(BlogPost, {
       foreignKey: 'userId',
       sourceKey: 'id',
+      as: 'posts',
     });
   };
   return UserTable;

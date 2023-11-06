@@ -24,6 +24,7 @@ const BlogPostSchema = (sequelize, DataTypes) => {
     BlogPostTable.belongsTo(User, {
       foreignKey: 'userId',
       targetKey: 'id',
+      as: 'user',
     });
   };
   return BlogPostTable;

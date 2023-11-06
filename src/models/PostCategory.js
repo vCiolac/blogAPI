@@ -22,12 +22,14 @@ const PostCatSchema = (sequelize, DataTypes) => {
       foreignKey: 'categoryId',
       otherkey: 'postId',
       targetKey: 'id',
+      as: 'blogPosts',
     });
     BlogPost.belongsToMany(Category, {
       through: PostCatTable,
       foreignKey: 'postId',
       otherkey: 'categoryId',
       targetKey: 'id',
+      as: 'categories',
     });
   };
   return PostCatTable;
