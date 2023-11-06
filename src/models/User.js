@@ -1,3 +1,4 @@
+const BlogPost = require('./BlogPost');
 const UserSchema = (sequelize, DataTypes) => {
   const UserTable = sequelize.define('User', {
     id: {
@@ -14,6 +15,12 @@ const UserSchema = (sequelize, DataTypes) => {
     tableName: 'users',
     underscored: true,
   });
+  UserTable.associate = ({ BlogPost }) => {
+    UserTable.hasMany(BlogPost, {
+      foreignKey: 'userId',
+      sourceKey: 'id',
+    });
+  };
   return UserTable;
 };
 

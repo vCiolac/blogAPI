@@ -1,3 +1,5 @@
+const User = require('./User');
+
 const BlogPostSchema = (sequelize, DataTypes) => {
   const BlogPostTable = sequelize.define('BlogPost', {
     id: {
@@ -7,8 +9,8 @@ const BlogPostSchema = (sequelize, DataTypes) => {
     },
     title: DataTypes.STRING,
     content: DataTypes.STRING,
-    user_id: {
-      type: DataTypes.NUMBER,
+    userId: {
+      type: DataTypes.INTEGER,
       foreignKey: true,
     },
     published: DataTypes.STRING,
@@ -18,6 +20,12 @@ const BlogPostSchema = (sequelize, DataTypes) => {
     tableName: 'blog_posts',
     underscored: true,
   });
+  BlogPostTable.associate = ({ User }) => {
+    BlogPostTable.belongsTo(User, {
+      foreignKey: 'userId',
+      targetKey: 'id',
+    });
+  };
   return BlogPostTable;
 };
 
