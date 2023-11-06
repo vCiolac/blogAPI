@@ -13,8 +13,8 @@ const BlogPostSchema = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       foreignKey: true,
     },
-    published: DataTypes.STRING,
-    updated: DataTypes.STRING
+    published: DataTypes.DATE,
+    updated: DataTypes.DATE,
   }, {
     timestamps: false,
     tableName: 'blog_posts',
