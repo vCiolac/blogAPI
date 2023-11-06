@@ -7,7 +7,7 @@ const CategoryValidade = async (categoryIds) => {
   return result;
 };
     
-const PostValidade = async (req, res, next) => {
+const NewPostValidade = async (req, res, next) => {
   const { body } = req;
   const { title, content, categoryIds } = body;
 
@@ -22,4 +22,15 @@ const PostValidade = async (req, res, next) => {
   next();
 };
 
-module.exports = PostValidade;
+const putPostValidade = async (req, res, next) => {
+  const { body } = req;
+  const { title, content } = body;
+
+  if (!title || !content) {
+    return res.status(400).json({ message: 'Some required fields are missing' });
+  }
+
+  next();
+};
+
+module.exports = { NewPostValidade, putPostValidade };

@@ -42,8 +42,29 @@ const getBlogPostById = async (id) => {
   return { status: 200, data: post };
 };
 
+const updateBlogPost = async (id, post, userId) => {
+  const { title, content } = post;
+  const verifyPost = await BlogPost.findByPk(id);
+  if (verifyPost.userId !== userId) {
+    return { status: 401, data: { message: 'Unauthorized user' } };
+  }
+  await BlogPost.update(
+    { title, content },
+    { where: { id } },
+  );
+  const updatedPost = await BlogPost.findOne({
+    where: { id },
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories' },
+    ],
+  });
+  return { status: 200, data: updatedPost };
+};
+
 module.exports = {
   addNewBlogPost,
   getAllBlogPosts,
   getBlogPostById,
+  updateBlogPost,
 };
