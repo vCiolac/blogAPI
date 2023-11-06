@@ -11,4 +11,14 @@ const getAllBlogPosts = async (req, res) => {
   res.status(status).json(data);
 };
 
-module.exports = { addNewBlogPost, getAllBlogPosts };
+const getBlogPostById = async (req, res) => {
+  const { id } = req.params;
+  const { status, data } = await postServices.getBlogPostById(id);
+  res.status(status).json(data);
+};
+
+module.exports = {
+  addNewBlogPost,
+  getAllBlogPosts,
+  getBlogPostById,
+};
